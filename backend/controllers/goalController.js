@@ -14,10 +14,11 @@ const getGoals = asyncHandler(async(req, res) => {
 })
 
 const setGoals = asyncHandler(async(req, res) => {
+    console.log(req.body)
     const goal = await Goal.create({
         text: req.body.text
     })
-    res.status(200).json({ message: 'Set My Goal' })
+    res.status(200).json(goal)
 })
 
 const updateGoals = asyncHandler(async(req, res) => {
@@ -29,7 +30,7 @@ const updateGoals = asyncHandler(async(req, res) => {
     const updatedGoal = await Goal.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
     })
-    res.status(200).json({ message: `Update Goal ${req.params.id}` })
+    res.status(200).json(updatedGoal)
 })
 
 const deleteGoals = asyncHandler(async(req, res) => {
@@ -41,7 +42,7 @@ const deleteGoals = asyncHandler(async(req, res) => {
 
     await goal.remove
     res.status(200).json({ id: req.params.id })
-    res.status(200).json({ message: `Delete Goal ${req.params.id}` })
+    // res.status(200).json(goal)
 })
 
 module.exports = {
